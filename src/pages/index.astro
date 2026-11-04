@@ -4,15 +4,24 @@ import SiteEntry from "../components/SiteEntry.astro";
 import UnknownFromWarning from "../components/UnknownFromWarning.astro";
 import sites from "../data/sites.json";
 import Layout from "../layouts/Layout.astro";
+import { buildDiscordComponentEmbed } from "../lib/discord-embed";
 import type { WebringSite } from "../types/webring";
 
 const list = sites as WebringSite[];
+const discordEmbed = buildDiscordComponentEmbed(list.length);
 ---
 
 <Layout
   title="Web dev & web design webring"
   description="Discover personal and studio sites focused on web development and web design. Join the ring or grab an embed for your own site."
 >
+  <script
+    slot="head"
+    is:inline
+    id="discord:component-embed"
+    type="application/json"
+    set:html={discordEmbed}
+  />
   <h1 class="hero-title">Web development &amp; web design webring</h1>
   <p class="hero-lede">
     This hub lists sites in the ring and hosts the prev, next, and random
