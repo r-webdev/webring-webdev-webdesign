@@ -1,0 +1,109 @@
+---
+type Props = {
+  name: string;
+  url: string;
+  badge?: string;
+};
+
+const { name, url, badge } = Astro.props;
+---
+
+<a
+  class="compact-list-item"
+  href={url}
+>
+  {badge ? (
+    <img
+      class="compact-list-item__badge"
+      src={badge}
+      alt={`${name} badge`}
+      width="88"
+      height="31"
+      loading="lazy"
+      onerror="this.onerror=null; this.src='/placeholder-badge.svg';"
+    />
+  ) : (
+    <div class="compact-list-item__badge-placeholder" aria-label="No badge available"></div>
+  )}
+  <div class="compact-list-item__content">
+    <span class="compact-list-item__name">{name}</span>
+    <span class="compact-list-item__url">{url}</span>
+  </div>
+</a>
+
+<style>
+  .compact-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 6px;
+    background: var(--card);
+    text-decoration: none;
+    color: var(--text);
+    transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .compact-list-item:hover {
+    background: var(--surface);
+    transform: translateX(2px);
+    border-color: var(--border);
+  }
+
+  .compact-list-item:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .compact-list-item__badge {
+    width: 88px;
+    height: 31px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+
+  .compact-list-item__badge-placeholder {
+    width: 88px;
+    height: 31px;
+    background: linear-gradient(135deg, var(--border) 0%, var(--muted) 100%);
+    border-radius: 4px;
+    border: 1px dashed var(--border);
+    flex-shrink: 0;
+  }
+
+  .compact-list-item__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .compact-list-item__name {
+    font-weight: 600;
+    color: var(--link);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .compact-list-item__url {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .compact-list-item__name:hover,
+  .compact-list-item__name:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
