@@ -1,6 +1,11 @@
 ---
+import sites from "../data/sites.json";
+import type { WebringSite } from "../types/webring";
+
 const year = new Date().getFullYear();
 const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
+const allSites = sites as WebringSite[];
+const sitesWithBadges = allSites.filter((site) => site.badge);
 ---
 
 <footer class="site-footer">
@@ -8,6 +13,28 @@ const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
     Web dev &amp; web design webring · {year} ·
     <a href={discordInviteUrl} class="site-footer__discord">Join Discord</a>
   </p>
+  <div class="site-footer__badges">
+    {
+      sitesWithBadges.map((site) => (
+        <a
+          class="site-footer__badge-link"
+          href={site.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={site.name}
+        >
+          <img
+            class="site-footer__badge-img"
+            src={site.badge}
+            alt={`${site.name} badge`}
+            width="88"
+            height="31"
+            loading="lazy"
+          />
+        </a>
+      ))
+    }
+  </div>
 </footer>
 
 <style>
@@ -16,6 +43,36 @@ const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
     padding: 1.25rem 1.5rem;
     border-top: 1px solid var(--border);
     background: var(--footer-bg);
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-footer__badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .site-footer__badge-link {
+    display: block;
+    transition: transform 200ms ease-in-out;
+  }
+
+  .site-footer__badge-link:hover {
+    transform: scale(1.05);
+  }
+
+  .site-footer__badge-img {
+    width: 88px;
+    height: 31px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: var(--surface);
   }
 
   .site-footer__text {
@@ -26,13 +83,13 @@ const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
   }
 
   .site-footer__discord {
-    color: var(--link);
+    color: var(--accent-moderator);
     font-weight: 500;
   }
 
   .site-footer__discord:hover,
   .site-footer__discord:focus-visible {
-    color: var(--link-hover);
+    color: var(--accent-moderator-hover);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
