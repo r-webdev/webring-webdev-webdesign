@@ -1,14 +1,24 @@
 ---
 import EmbedGenerator from "../components/EmbedGenerator.astro";
-import SiteEntry from "../components/SiteEntry.astro";
+import FeaturedCard from "../components/FeaturedCard.astro";
+import CompactListItem from "../components/CompactListItem.astro";
 import UnknownFromWarning from "../components/UnknownFromWarning.astro";
 import sites from "../data/sites.json";
 import Layout from "../layouts/Layout.astro";
 import { buildDiscordComponentEmbed } from "../lib/discord-embed";
 import type { WebringSite } from "../types/webring";
 
-const list = sites as WebringSite[];
-const discordEmbed = buildDiscordComponentEmbed(list.length);
+const allSites = sites as WebringSite[];
+
+// Randomly select up to 8 featured sites (or all if fewer than 8)
+const shuffledSites = [...allSites].sort(() => Math.random() - 0.5);
+const maxFeatured = 8;
+const featuredCount = Math.min(maxFeatured, shuffledSites.length);
+const featuredSites = shuffledSites.slice(0, featuredCount);
+const remainingSites = shuffledSites.slice(featuredCount);
+const showSeeAll = remainingSites.length > 0;
+
+const discordEmbed = buildDiscordComponentEmbed(allSites.length);
 ---
 
 <Layout
@@ -31,20 +41,50 @@ const discordEmbed = buildDiscordComponentEmbed(list.length);
   <section class="sites-section" aria-labelledby="sites">
     <h2 id="sites" class="section-title">Sites in the ring</h2>
     <p class="section-meta">
-      {list.length}
-      {list.length === 1 ? "site" : "sites"} listed.
+      {allSites.length}
+      {allSites.length === 1 ? "site" : "sites"} listed.
     </p>
-    <ul class="member-list">
-      {
-        list.map((site) => (
-          <SiteEntry
-            name={site.name}
-            url={site.url}
-            description={site.description}
-          />
-        ))
-      }
-    </ul>
+    
+    {/* Featured Section */}
+    {featuredSites.length > 0 && (
+      <div class="featured-section">
+        <h3 class="featured-title">Featured Sites</h3>
+        <div class="featured-grid">
+          {featuredSites.map((site) => (
+            <FeaturedCard
+              name={site.name}
+              url={site.url}
+              description={site.description}
+              badge={site.badge}
+            />
+          ))}
+          {remainingSites.length > 0 && (
+            <div class="featured-grid__hidden" id="hidden-sites">
+              {remainingSites.map((site) => (
+                <FeaturedCard
+                  name={site.name}
+                  url={site.url}
+                  description={site.description}
+                  badge={site.badge}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        {showSeeAll && (
+          <div class="featured-section__see-all">
+            <button
+              class="see-all-btn"
+              id="see-all-btn"
+              type="button"
+              onclick="document.getElementById('hidden-sites').style.display = 'grid'; this.style.display = 'none'"
+            >
+              See all
+            </button>
+          </div>
+        )}
+      </div>
+    )}
   </section>
 
   <EmbedGenerator />
@@ -81,10 +121,72 @@ const discordEmbed = buildDiscordComponentEmbed(list.length);
     font-size: 0.9375rem;
   }
 
-  .member-list {
-    margin: 0;
-    padding: 0;
+  /* Featured Section */
+  .featured-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .featured-title {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+    color: var(--accent-moderator);
+  }
+
+  .featured-grid {
     display: grid;
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .featured-grid__hidden {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .featured-grid__hidden.grid {
+    display: grid;
+  }
+
+  .featured-section__see-all {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .see-all-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--surface);
+    color: var(--accent-moderator);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  }
+
+  .see-all-btn:hover {
+    background: var(--card);
+    color: var(--accent-moderator-hover);
+    border-color: var(--accent-moderator);
+  }
+
+  /* List Section */
+  .list-section {
+    margin-top: 1.5rem;
+  }
+
+  .list-title {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+    color: var(--accent-moderator);
+  }
+
+  .compact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 </style>
