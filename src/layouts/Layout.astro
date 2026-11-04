@@ -73,7 +73,6 @@ const imageAlt = "Web dev & web design webring";
     --border: #e2e8f0;
     --link: #4f46e5;
     --link-hover: #4338ca;
-    --ring: #6366f1;
     --footer-bg: #f1f5f9;
     --code-bg: #e2e8f0;
     --warn-bg: #fef3c7;
@@ -81,6 +80,37 @@ const imageAlt = "Web dev & web design webring";
     --danger: #b91c1c;
     --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --max: 42rem;
+    /* Accent colors - adjusted for accessibility */
+    --accent-moderator: #42b883;
+    --accent-moderator-hover: #3aa876;
+    --accent-owner: #f1c40f;
+    --accent-owner-hover: #d4ac0d;
+    /* Ring color uses accent moderator */
+    --ring: #42b883;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --surface: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --link: #6366f1;
+      --link-hover: #4f46e5;
+      --footer-bg: #0f172a;
+      --code-bg: #1e293b;
+      --warn-bg: #78350f;
+      --warn-border: #92400e;
+      --danger: #dc2626;
+      /* Dark mode accent variants for better contrast */
+      --accent-moderator: #48c774;
+      --accent-moderator-hover: #52d480;
+      --accent-owner: #ffd166;
+      --accent-owner-hover: #ffca50;
+      /* Ring color uses accent moderator */
+      --ring: #48c774;
+    }
   }
 
   *,
@@ -97,11 +127,17 @@ const imageAlt = "Web dev & web design webring";
     margin: 0;
     min-height: 100vh;
     font-family: var(--font);
-    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 28%);
+    background: var(--surface);
     color: var(--text);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: var(--surface);
+    }
   }
 
   a {
@@ -131,7 +167,7 @@ const imageAlt = "Web dev & web design webring";
 
   .site-header {
     border-bottom: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--surface);
     backdrop-filter: blur(8px);
     position: sticky;
     top: 0;
@@ -159,7 +195,7 @@ const imageAlt = "Web dev & web design webring";
 
   .nav__brand:hover,
   .nav__brand:focus-visible {
-    color: var(--link);
+    color: var(--accent-moderator);
   }
 
   .nav__links {
@@ -180,7 +216,7 @@ const imageAlt = "Web dev & web design webring";
 
   .nav__links a:hover,
   .nav__links a:focus-visible {
-    color: var(--link);
+    color: var(--accent-moderator);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
