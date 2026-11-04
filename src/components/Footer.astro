@@ -1,9 +1,13 @@
 ---
 const year = new Date().getFullYear();
+const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
 ---
 
 <footer class="site-footer">
-  <p class="site-footer__text">Web dev &amp; web design webring · {year}</p>
+  <p class="site-footer__text">
+    Web dev &amp; web design webring · {year} ·
+    <a href={discordInviteUrl} class="site-footer__discord">Join Discord</a>
+  </p>
 </footer>
 
 <style>
@@ -19,5 +23,17 @@ const year = new Date().getFullYear();
     text-align: center;
     font-size: 0.875rem;
     color: var(--muted);
+  }
+
+  .site-footer__discord {
+    color: var(--link);
+    font-weight: 500;
+  }
+
+  .site-footer__discord:hover,
+  .site-footer__discord:focus-visible {
+    color: var(--link-hover);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>

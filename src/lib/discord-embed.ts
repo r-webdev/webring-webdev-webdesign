@@ -7,12 +7,13 @@ const ACCENT_COLOR = 0x4f46e5;
 
 /**
  * JSON for Discord's `discord:component-embed` script tag: a container with
- * text and two link buttons. Throws if the payload exceeds Discord's size cap
+ * text and three link buttons. Throws if the payload exceeds Discord's size cap
  * so an oversize embed can't ship silently.
  */
 export function buildDiscordComponentEmbed(siteCount: number): string {
   const hub = HUB_BASE_URL;
   const noun = siteCount === 1 ? "site" : "sites";
+  const discordInviteUrl = "https://discord.gg/mtmBNsjdeK";
 
   const payload = {
     component: {
@@ -32,6 +33,12 @@ export function buildDiscordComponentEmbed(siteCount: number): string {
               style: 5,
               label: "View random site",
               url: `${hub}/visit-random`,
+            },
+            {
+              type: 2,
+              style: 5,
+              label: "Join Discord",
+              url: discordInviteUrl,
             },
           ],
         },
