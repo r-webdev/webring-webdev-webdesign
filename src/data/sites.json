@@ -8,5 +8,11 @@
     "name": "from scratch",
     "url": "https://skraburski.com",
     "description": "A personal space with tools and blogs written by Michal Skraburski."
+  },
+  {
+    "name": "FoxedDev",
+    "url": "https://foxed.dev/",
+    "description": "Hi, I'm Foxed! I'm a Minecraft data pack creator and web developer from Germany.",
+    "badge": "https://foxed.dev/badges/foxeddev.gif"
   }
 ]
