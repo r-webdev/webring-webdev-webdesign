@@ -66,12 +66,21 @@ const { name, url, description, badge } = Astro.props;
     grid-column: 1;
     grid-row: 1;
     min-width: 0;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
   }
 
   .featured-card__description {
     grid-column: 1 / -1;
     grid-row: 2;
     min-width: 0;
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.5;
   }
 
   .featured-card__badge-container {
@@ -96,21 +105,6 @@ const { name, url, description, badge } = Astro.props;
     box-sizing: content-box;
   }
 
-  .featured-card__name {
-    margin: 0;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.3;
-  }
-
-  .featured-card__description {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
   .featured-card__visit-link {
     display: inline-flex;
     align-items: center;
@@ -130,5 +124,28 @@ const { name, url, description, badge } = Astro.props;
   .featured-card__arrow {
     transition: transform 200ms ease-in-out;
     display: inline-block;
+  }
+
+  /* Mobile style */
+  @media (max-width: 900px) {
+    .featured-card {
+      gap: 1rem;
+    }
+
+    .featured-card__name {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: normal;
+    }
+
+    .featured-card__badge-container {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 </style>

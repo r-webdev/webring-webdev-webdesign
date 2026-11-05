@@ -188,4 +188,13 @@ const discordEmbed = buildDiscordComponentEmbed(allSites.length);
     flex-direction: column;
     gap: 0.25rem;
   }
+
+  /* Mobile style */
+  @media (max-width: 900px) {
+    .featured-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
 </style>
