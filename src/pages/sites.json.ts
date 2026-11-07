@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import sites from "../data/sites.json";
+import sites from "#src/data/sites.json";
 
 // Re-exports src/data/sites.json at /sites.json so the browser can fetch it,
 // while keeping a single source of truth for the build-time imports.

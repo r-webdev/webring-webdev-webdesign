@@ -1,12 +1,12 @@
 ---
-import EmbedGenerator from "../components/EmbedGenerator.astro";
-import FeaturedCard from "../components/FeaturedCard.astro";
-import CompactListItem from "../components/CompactListItem.astro";
-import UnknownFromWarning from "../components/UnknownFromWarning.astro";
-import sites from "../data/sites.json";
-import Layout from "../layouts/Layout.astro";
-import { buildDiscordComponentEmbed } from "../lib/discord-embed";
-import type { WebringSite } from "../types/webring";
+import EmbedGenerator from "#src/components/EmbedGenerator.astro";
+import FeaturedCard from "#src/components/FeaturedCard.astro";
+import CompactListItem from "#src/components/CompactListItem.astro";
+import UnknownFromWarning from "#src/components/UnknownFromWarning.astro";
+import sites from "#src/data/sites.json";
+import Layout from "#src/layouts/Layout.astro";
+import { buildDiscordComponentEmbed } from "#src/lib/discord-embed.ts";
+import type { WebringSite } from "#src/types/webring.ts";
 
 const allSites = sites as WebringSite[];
 
