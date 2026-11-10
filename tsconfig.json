@@ -3,11 +3,9 @@
   "include": [".astro/types.d.ts", "src/**/*", "astro.config.ts"],
   "compilerOptions": {
     "paths": {
-      "@components/*": ["./src/components/*.astro"],
-      "@data/*": ["./src/data/*"],
-      "@layouts/*": ["./src/layouts/*.astro"],
-      "@lib/*": ["./src/lib/*"],
-      "@types_/*": ["./src/types/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*.astro"],
+      "@/layouts/*": ["./src/layouts/*.astro"]
     }
   }
 }

@@ -1,11 +1,11 @@
 ---
-import EmbedGenerator from "@components/EmbedGenerator";
-import FeaturedCard from "@components/FeaturedCard";
-import UnknownFromWarning from "@components/UnknownFromWarning";
-import sites from "@data/sites.json";
-import Layout from "@layouts/Layout";
-import { buildDiscordComponentEmbed } from "@lib/discord-embed";
-import type { WebringSite } from "@types_/webring";
+import EmbedGenerator from "@/components/EmbedGenerator";
+import FeaturedCard from "@/components/FeaturedCard";
+import UnknownFromWarning from "@/components/UnknownFromWarning";
+import sites from "@/data/sites.json";
+import Layout from "@/layouts/Layout";
+import { buildDiscordComponentEmbed } from "@/lib/discord-embed";
+import type { WebringSite } from "@/types/webring";
 
 const allSites = sites as WebringSite[];
 

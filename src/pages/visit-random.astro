@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout";
+import Layout from "@/layouts/Layout";
 ---
 
 <Layout
@@ -17,7 +17,7 @@ import Layout from "@layouts/Layout";
 </Layout>
 
 <script>
-  import { getWebringUrls, pickRandomIndex } from "@lib/webring-nav";
+  import { getWebringUrls, pickRandomIndex } from "@/lib/webring-nav";
 
   const urls = getWebringUrls();
   const target = urls[pickRandomIndex(urls.length)];

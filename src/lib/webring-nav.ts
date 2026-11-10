@@ -1,5 +1,5 @@
-import sitesData from "@data/sites.json";
-import type { WebringSite } from "@types_/webring";
+import sitesData from "@/data/sites.json";
+import type { WebringSite } from "@/types/webring";
 
 const sites = sitesData as WebringSite[];
 
