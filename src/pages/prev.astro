@@ -1,5 +1,5 @@
 ---
-import Layout from "#src/layouts/Layout.astro";
+import Layout from "@layouts/Layout";
 ---
 
 <Layout
@@ -22,7 +22,7 @@ import Layout from "#src/layouts/Layout.astro";
     getWebringUrls,
     hubPathWithUnlistedReferrer,
     resolveRelativeIndex,
-  } from "#src/lib/webring-nav.ts";
+  } from "@lib/webring-nav";
 
   const urls = getWebringUrls();
   if (urls.length === 0) {

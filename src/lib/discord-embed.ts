@@ -1,4 +1,4 @@
-import { HUB_BASE_URL } from "#src/lib/hub-url.ts";
+import { HUB_BASE_URL } from "@lib/hub-url";
 
 /** Discord drops component-embed payloads larger than this (in bytes). */
 const MAX_PAYLOAD_BYTES = 3000;

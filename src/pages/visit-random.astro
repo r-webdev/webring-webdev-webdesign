@@ -1,5 +1,5 @@
 ---
-import Layout from "#src/layouts/Layout.astro";
+import Layout from "@layouts/Layout";
 ---
 
 <Layout
@@ -17,7 +17,7 @@ import Layout from "#src/layouts/Layout.astro";
 </Layout>
 
 <script>
-  import { getWebringUrls, pickRandomIndex } from "#src/lib/webring-nav.ts";
+  import { getWebringUrls, pickRandomIndex } from "@lib/webring-nav";
 
   const urls = getWebringUrls();
   const target = urls[pickRandomIndex(urls.length)];
