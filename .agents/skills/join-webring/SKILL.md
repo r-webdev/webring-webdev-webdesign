@@ -33,7 +33,9 @@ Build the snippet like this, where `FROM` is the user's site URL **percent-encod
 <!-- Web dev & web design webring -->
 <nav class="wd-web-webring" aria-label="Web dev and web design webring">
   <a href="https://webring.webdev-webdesign.com/prev/?from=FROM">&larr; Prev</a>
-  <a href="https://webring.webdev-webdesign.com/">Web dev &amp; design webring</a>
+  <a href="https://webring.webdev-webdesign.com/"
+    >Web dev &amp; design webring</a
+  >
   <a href="https://webring.webdev-webdesign.com/random/?from=FROM">Random</a>
   <a href="https://webring.webdev-webdesign.com/next/?from=FROM">Next &rarr;</a>
 </nav>
@@ -41,9 +43,19 @@ Build the snippet like this, where `FROM` is the user's site URL **percent-encod
 
 URL rules:
 
-- Normalize the site URL first: must be `http(s)`, drop any `#fragment`, and drop a trailing `/` unless the path is just `/` (so `https://example.com/blog/` becomes `https://example.com/blog`, while `https://example.com` becomes `https://example.com/`).
-- The URL in the snippet must be **exactly the same** as the `url` in the `sites.json` entry, or prev/next won't recognise the site and visitors get sent back to the hub. Use the same normalized URL in both.
-- Example: for `https://example.com/` the prev link is `https://webring.webdev-webdesign.com/prev/?from=https%3A%2F%2Fexample.com%2F`.
+- Use the user's URL as given for url in sites.json (must include a scheme). If the
+  user passes just a bare `domain.tld` (no scheme), use it as is and prepend
+  `https://` yourself, e.g. `example.com` becomes `https://example.com`. Don't add
+  or remove `www.`, and don't ask them to confirm; a site shared this way is
+  expected to work.
+- For the snippet, normalize it the way the generator does: drop any `#fragment`,
+  drop a trailing / unless the path is just /, then percent-encode it.
+- Prev/Next match the snippet's from against `sites.json` after normalizing both,
+  so a trailing slash or domain capitalization doesn't matter. Scheme, `www.`,
+  path, path case and query strings do. If the user isn't sure whether their site
+  uses www. or redirects, ask them to open it and copy the address bar.
+- Example: for `https://example.com` the prev link is
+  `https://webring.webdev-webdesign.com/prev/?from=https%3A%2F%2Fexample.com%2F`.
 
 After the snippet, add one short line: paste it into the header, footer or sidebar of every page, and style the `nav.wd-web-webring` element to match the site. Designing their own 88×31 badge is encouraged. The snippet is deliberately unstyled. Do not lecture about what maintainers check or speculate about whether the site is real.
 
